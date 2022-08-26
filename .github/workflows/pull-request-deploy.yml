@@ -1,9 +1,8 @@
-name: "Pull Request mm"
+name: "Pull Request pericaaaaaa"
 on:
   pull_request:
-    branches:
-      - master
-    types: [assigned, opened, synchronize, reopened]
+    types: [labeled, opened, synchronize]
+  branches: master
     
 
 jobs:
