@@ -1,8 +1,8 @@
-name: "Pull Request deploy"
+name: "Pull Request markannnnnn"
 on:
   pull_request:
     branches:
-      - master
+      - dev
     # types: [assigned, opened, synchronize, reopened]
     
 
