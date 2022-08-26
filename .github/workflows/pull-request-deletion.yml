@@ -27,9 +27,9 @@ jobs:
       - name: install requirements
         uses: actions/checkout@v3
         uses: actions/setup-python@v4
-          with:
-            python-version: '3.8'
-            cache: 'pip' # caching pip dependencies
+        with:
+          python-version: '3.8'
+          cache: 'pip' # caching pip dependencies
         run: pip install -r requirements.txt
 
       - name: configure AWS credentials
