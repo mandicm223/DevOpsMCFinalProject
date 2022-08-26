@@ -311,7 +311,7 @@
      ],
      "VpcEndpointIds": [
       {
-       "Fn::ImportValue": "networking-stack-mm:ExportsOutputRefAPIendpoint49F6367846148020"
+       "Fn::ImportValue": "networking-stack-mm-None:ExportsOutputRefAPIendpoint49F6367846148020"
       }
      ]
     },
@@ -388,7 +388,7 @@
     "aws:cdk:path": "lambda-api-dynamo-stack-mm/RestLambdaApi/Account"
    }
   },
-  "RestLambdaApiDeploymentF252E3298dc0c387e9cad3639ebfc80daaa88866": {
+  "RestLambdaApiDeploymentF252E329f7b36b6651424e2da2d520045fe247ca": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
     "RestApiId": {
@@ -414,7 +414,7 @@
      "Ref": "RestLambdaApi65A94483"
     },
     "DeploymentId": {
-     "Ref": "RestLambdaApiDeploymentF252E3298dc0c387e9cad3639ebfc80daaa88866"
+     "Ref": "RestLambdaApiDeploymentF252E329f7b36b6651424e2da2d520045fe247ca"
     },
     "MethodSettings": [
      {
