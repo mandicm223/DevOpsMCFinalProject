@@ -2,6 +2,7 @@ name: "Pull Request pericaaaaaa"
 on:
   pull_request:
     types: [labeled, opened]
+    branch: master
     
 jobs:
   deploy:
@@ -36,13 +37,11 @@ jobs:
       #     python-version: '3.8'
       #     cache: 'pip' # caching pip dependencies
       #   run: pip install -r requirements.txt
-      - name: Initialize Python 3.8
-        uses: actions/setup-python@v1
+      - uses: actions/setup-python@v2
         with:
-            python-version: 3.8
-        - name: Install dependencies
-        run: |
-            python -m pip install -r requirements.txt
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
 
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
