@@ -1,8 +1,7 @@
 name: "Pull Request pericaaaaaa"
 on:
   pull_request:
-    types: [labeled, opened, synchronize]
-  branches: master
+    types: [labeled, opened]
     
 
 jobs:
