@@ -2,13 +2,15 @@ name: "Pull Request clean-up"
 
 on:
   pull_request:
+    branches:
+      - master
     types: [unlabeled, closed]
 
 jobs:
   clean-up:
     if: |
-      (github.event.action == 'unlabeled' && github.event.label.name == ':rocket: deploy') ||
-      (github.event.action == 'closed' && contains(github.event.pull_request.labels.*.name, ':rocket: deploy'))
+      (github.event.action == 'unlabeled' && github.event.label.name == 'deploy') ||
+      (github.event.action == 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy'))
     runs-on: ubuntu-latest
     steps:
       - name: inject slug/short variables
@@ -22,14 +24,13 @@ jobs:
 
       # there is a bug with the actions/cache used in bahmutov/npm-install@v1 on "closed" event
       # more infos here : https://github.com/actions/cache/issues/478
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            python -m pip install -r requirements.txt
+      - name: install requirements
+        uses: actions/checkout@v3
+        uses: actions/setup-python@v4
+          with:
+            python-version: '3.8'
+            cache: 'pip' # caching pip dependencies
+        run: pip install -r requirements.txt
 
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -39,10 +40,10 @@ jobs:
           aws-region: eu-west-1
 
       - name: destroy the stack on AWS
-          run: |
-            cdk destroy ecs-cluster-stack-mm
-            cdk destroy lambda-api-dynamo-stack-mm
-            cdk destroy networking-stack-mm
+        run: |
+          cdk destroy ecs-cluster-stack-mm
+          cdk destroy lambda-api-dynamo-stack-mm
+          cdk destroy networking-stack-mm
 
       - name: delete the github deployments and the corresponding environment
         uses: strumwolf/delete-deployment-environment@v1.1.0
