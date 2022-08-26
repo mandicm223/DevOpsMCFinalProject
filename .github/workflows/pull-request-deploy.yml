@@ -1,4 +1,4 @@
-name: "Pull Request markannnnnn"
+name: "Pull Request mm"
 on:
   pull_request:
     branches:
